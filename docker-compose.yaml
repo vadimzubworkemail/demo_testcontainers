@@ -1,0 +1,11 @@
+version: '3.5'
+
+services:
+  flyway_demo_db:
+    container_name: flyway_demo_db
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_USER=admin
+      - POSTGRES_PASSWORD=root
+    image: postgres:alpine3.18
