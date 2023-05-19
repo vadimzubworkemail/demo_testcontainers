@@ -1,11 +1,9 @@
-package users;
+package com.example.demo_testcontainers.users;
 
-import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
-import lombok.ToString;
 import lombok.Value;
-
+import javax.persistence.*;
 import java.util.UUID;
 
 @Entity
@@ -13,8 +11,6 @@ import java.util.UUID;
 @Value
 @AllArgsConstructor
 @NoArgsConstructor(force = true)
-@ToString
-
 public class User {
     @Id
     @Column(name = "id")

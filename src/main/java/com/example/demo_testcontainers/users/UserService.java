@@ -1,4 +1,4 @@
-package users;
+package com.example.demo_testcontainers.users;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -21,12 +21,12 @@ public class UserService {
         return userRepository.findAll();
     }
 
-    public User loadUserById(UUID uuid) {
-        return userRepository.findById(uuid).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+    public User loadUserById(UUID id) {
+        return userRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
     }
 
 
-    public User createNewUser(String login, String email) {
+    public User createUser(String login, String email) {
         return userRepository.save(new User(
                 null, login, email
         ));
@@ -42,7 +42,11 @@ public class UserService {
         }
     }
 
-    public void deleteUserById(UUID uuid) {
-        userRepository.deleteById(uuid);
+    public void deleteUserById(UUID id) {
+        userRepository.deleteById(id);
+    }
+
+    public void deleteAllUsers() {
+        userRepository.deleteAll();
     }
 }

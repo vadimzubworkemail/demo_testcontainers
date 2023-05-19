@@ -1,4 +1,4 @@
-package users;
+package com.example.demo_testcontainers.users;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,12 +30,22 @@ public class UserController {
 
     @PostMapping
     public User createUser(@RequestBody String login, @RequestBody String email) {
-        return userService.createNewUser(login, email);
+        return userService.createUser(login, email);
     }
 
     @PutMapping
     public User editUser(@RequestBody UUID id, @RequestBody String login, @RequestBody String email) {
         return userService.editUser(id, login, email);
+    }
+
+    @GetMapping
+    public void deleteAllUser() {
+        userService.deleteAllUsers();
+    }
+
+    @GetMapping(path = "{id}")
+    public void deleteUserById(@PathVariable UUID id) {
+        userService.deleteUserById(id);
     }
 }
 
