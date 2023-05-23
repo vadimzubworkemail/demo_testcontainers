@@ -3,6 +3,7 @@ package com.example.demo_testcontainers.users;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import lombok.Value;
+
 import javax.persistence.*;
 import java.util.UUID;
 

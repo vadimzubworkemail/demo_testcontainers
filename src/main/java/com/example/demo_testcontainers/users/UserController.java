@@ -23,7 +23,7 @@ public class UserController {
         return userService.loadAllUsers();
     }
 
-    @GetMapping( path = "/{id}")
+    @GetMapping(path = "/{id}")
     public User loadUserById(@PathVariable UUID id) {
         return userService.loadUserById(id);
     }
@@ -38,12 +38,7 @@ public class UserController {
         return userService.editUser(id, login, email);
     }
 
-    @GetMapping
-    public void deleteAllUser() {
-        userService.deleteAllUsers();
-    }
-
-    @GetMapping(path = "{id}")
+    @DeleteMapping(path = "/{id}")
     public void deleteUserById(@PathVariable UUID id) {
         userService.deleteUserById(id);
     }
