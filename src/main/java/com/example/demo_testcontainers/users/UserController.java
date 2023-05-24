@@ -38,6 +38,11 @@ public class UserController {
         return userService.editUser(id, login, email);
     }
 
+    @DeleteMapping
+    public void deleteAllUser() {
+        userService.deleteAllUsers();
+    }
+
     @DeleteMapping(path = "/{id}")
     public void deleteUserById(@PathVariable UUID id) {
         userService.deleteUserById(id);
