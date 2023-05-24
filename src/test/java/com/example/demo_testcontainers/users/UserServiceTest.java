@@ -45,7 +45,5 @@ class UserServiceTest {
         User editedUser = userService.editUser(uuid, "Borya", "borya@mail.net");
         assertThat(editedUser.getEmail()).isEqualTo("borya@mail.net");
         assertThat(editedUser.getLogin()).isEqualTo("Borya");
-
-
     }
 }

@@ -27,7 +27,7 @@ public class UserService {
 
 
     public User createUser(String login, String email) {
-        return userRepository.save(new User(
+        return userRepository.saveAndFlush(new User(
                 null, login, email
         ));
     }
@@ -36,7 +36,7 @@ public class UserService {
         final User currentUser = loadUserById(uuid);
         try {
             assert currentUser.getId() != null;
-            return userRepository.save(new User(uuid, login, email));
+            return userRepository.saveAndFlush(new User(uuid, login, email));
         } catch (Exception e) {
             throw new RuntimeException("Не получилось отредактировать пользователя");
         }

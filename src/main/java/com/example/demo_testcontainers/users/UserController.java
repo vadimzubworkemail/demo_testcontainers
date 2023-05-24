@@ -29,13 +29,13 @@ public class UserController {
     }
 
     @PostMapping
-    public User createUser(@RequestBody String login, @RequestBody String email) {
-        return userService.createUser(login, email);
+    public User createUser(@RequestBody UserInput input) {
+        return userService.createUser(input.login, input.login);
     }
 
-    @PutMapping
-    public User editUser(@RequestBody UUID id, @RequestBody String login, @RequestBody String email) {
-        return userService.editUser(id, login, email);
+    @PutMapping("/{id}")
+    public User editUser(@PathVariable UUID id, @RequestBody UserInput input) {
+        return userService.editUser(id, input.login, input.email);
     }
 
     @DeleteMapping
