@@ -4,14 +4,8 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.util.TestPropertyValues;
-import org.springframework.context.ApplicationContextInitializer;
-import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.web.server.ResponseStatusException;
-import org.testcontainers.containers.PostgreSQLContainer;
-import org.testcontainers.junit.jupiter.Container;
-import org.testcontainers.junit.jupiter.Testcontainers;
 
 import java.util.List;
 import java.util.UUID;
@@ -21,18 +15,12 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.assertj.core.api.AssertionsForClassTypes.catchThrowable;
 
 @SpringBootTest
-@Testcontainers
-@ContextConfiguration(initializers = {UserServiceCRUDWithTestcontainersTest.Initialize.class})
-class UserServiceCRUDWithTestcontainersTest {
-    private static final String DATABASE_NAME = "test_db";
-    @Container
-    public static PostgreSQLContainer<?> testDB = new PostgreSQLContainer<>("postgres:15-alpine3.18")
-            .withReuse(true)
-            .withDatabaseName(DATABASE_NAME)
-            .withUsername("postgres")
-            .withPassword("postgres");
+@ContextConfiguration(initializers = {PostgresContainer.Initialize.class})
+class UserServiceCRUDWithTestcontainersTest extends PostgresContainer {
+
     @Autowired
     UserService userService;
+
     UUID id;
 
     @AfterEach
@@ -90,17 +78,5 @@ class UserServiceCRUDWithTestcontainersTest {
 
         assertThat(throwable).isInstanceOf(ResponseStatusException.class);
         assertThat(throwable.getMessage()).isEqualTo("404 NOT_FOUND");
-    }
-
-    static class Initialize implements ApplicationContextInitializer<ConfigurableApplicationContext> {
-
-        @Override
-        public void initialize(ConfigurableApplicationContext applicationContext) {
-            TestPropertyValues.of(
-                    "spring.datasource.username=" + testDB.getUsername(),
-                    "spring.datasource.password=" + testDB.getPassword(),
-                    "spring.datasource.url=" + testDB.getJdbcUrl()
-            ).applyTo(applicationContext.getEnvironment());
-        }
     }
 }
