@@ -1,10 +1,8 @@
-
-
 CREATE TABLE IF NOT EXISTS users
 (
-    id UUID PRIMARY KEY NOT NULL,
-    u_login VARCHAR NOT NULL,
-    email VARCHAR NOT NULL
+    id      UUID PRIMARY KEY NOT NULL,
+    u_login VARCHAR          NOT NULL,
+    email   VARCHAR          NOT NULL
 );
 
 -- INSERT INTO users (id, u_login, email) VALUES

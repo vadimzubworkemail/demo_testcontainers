@@ -38,10 +38,10 @@ public class UserController {
         return userService.editUser(id, input.getLogin(), input.getEmail());
     }
 
-    @DeleteMapping
-    public void deleteAllUser() {
-        userService.deleteAllUsers();
-    }
+//    @DeleteMapping
+//    public void deleteAllUser() {
+//        userService.deleteAllUsers();
+//    }
 
     @DeleteMapping(path = "/{id}")
     public void deleteUserById(@PathVariable UUID id) {
